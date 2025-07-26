@@ -1,0 +1,401 @@
+
+
+namespace Csharp
+{
+
+    #region EX1
+    //internal interface IMyType// top level interface
+    //{
+    //    //int x; // Invalid in interfaces because x is data that stored in objects, and interfaces can't create objects.
+    //    // What Can Write Inside The Interface:
+    //    // 1. Signature Of Properties
+    //    // 2. Signature Of Methods [Name, Parameter, Return Type]
+    //    // 3. Default Implmented Methods [Fully Implemented Methods]
+    //    // 4. static member /constant 
+
+    //    // 2. Signature Of Methods [Name, Parameter, Return Type]
+    //    void MyFun();//defualt public
+
+    //    // 1. Signature Of Properties
+    //    double Salary { set; get; } //compiler will not generate backing field
+
+    //    // 3. Default Implmented Methods [Fully Implemented Methods]
+    //    void Print()
+    //    {
+    //        Console.WriteLine( "Default Implmented Methods [Fully Implemented Methods]");
+    //    }
+    //}
+    //internal class MyType : IMyType//inhertance before interface
+    //{
+    //    public double Salary { get; set; }
+
+    //    public void MyFun()
+    //    {
+    //        Console.WriteLine("Hi Eng mohamed");
+    //    }
+    //    public void Print()//like but not override
+    //    {
+    //        Console.WriteLine( "class method");
+    //    }
+    //} 
+    #endregion
+
+    #region EX2
+    internal interface ISeries
+    {
+        int Current { get; set; } // Signataure Of Property
+        void Next();
+       
+        public void Reset()
+        {
+            Current = 0;
+        }
+    }
+    internal class SeriesByTwo : ISeries
+    {
+        public int Current { get; set; } // 0
+
+        public void Next()
+        {
+            Current += 2;
+        }
+    }
+    internal class SeriesByThree : ISeries
+    {
+        public int Current { get; set; }
+
+        public void Next()
+        {
+            Current += 3;
+        }
+    }
+    internal class SeriesByFour : ISeries
+    {
+        public int Current { get; set; }
+
+        public void Next()
+        {
+            Current += 4;
+        }
+    }
+    #endregion
+    #region EX3
+    internal interface IMoveable
+    {
+        public int Speed { get; set; }
+
+        public void Backward()
+        {
+            Console.WriteLine(value: "Car IMoveable Backward");
+        }
+
+        public void Forward()
+        {
+            Console.WriteLine(value: "Car IMoveable Forward");
+        }
+
+        public void Left()
+        {
+            Console.WriteLine(value: "Car IMoveable Left");
+        }
+
+        public void Right()
+        {
+            Console.WriteLine(value: "Car IMoveable Right");
+        }
+    }
+    internal interface IFlyable
+    {
+        public int Speed { get; set; }
+
+        public void Backward()
+        {
+            Console.WriteLine(value: "Airplane IMoveable Backward");
+        }
+
+        public void Forward()
+        {
+            Console.WriteLine(value: "Airplane IMoveable Forward");
+        }
+
+        public void Left()
+        {
+            Console.WriteLine(value: "Airplane IMoveable Left");
+        }
+
+        public void Right()
+        {
+            Console.WriteLine(value: "Airplane IMoveable Right");
+        }
+    }
+    internal class Airplane : IMoveable, IFlyable//explicit impelementation
+    {
+        int IMoveable.Speed { get; set; }
+        int IFlyable.Speed { get; set; }
+
+        void IMoveable.Backward()//private  cant access without ref of interface
+        {
+            Console.WriteLine(value: "Car IMoveable Backward");
+        }
+
+        void IMoveable.Forward()
+        {
+            Console.WriteLine(value: "Car IMoveable Forward");
+        }
+
+        void IMoveable.Left()
+        {
+            Console.WriteLine(value: "Car IMoveable Left");
+        }
+
+        void IMoveable.Right()
+        {
+            Console.WriteLine(value: "Car IMoveable Right");
+        }
+
+        void IFlyable.Backward()
+        {
+            Console.WriteLine(value: "AirPlane IFlyable Backward");
+        }
+
+        void IFlyable.Forward()
+        {
+            Console.WriteLine(value: "AirPlane IFlyable Forward");
+        }
+
+        void IFlyable.Left()
+        {
+            Console.WriteLine(value: "AirPlane IFlyable Left");
+        }
+
+        void IFlyable.Right()
+        {
+            Console.WriteLine(value: "AirPlane IFlyable Right");
+        }
+    }
+    #endregion
+   
+
+    //class EmployeeComparerSalary : IComparer
+    //{
+    //    public int Compare(object? x, object? y)
+    //    {
+    //        Employees X = (Employees)x;
+    //        Employees Y = (Employees)y;
+
+    //        if (X.Salary > Y.Salary) return 1;
+    //        else if (X.Salary < Y.Salary) return -1;
+    //        else return 0;
+    //    }
+    //}
+
+    internal class Employees : IComparable
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public double Salary { get; set; }
+
+        public Employees()
+        {
+
+        }
+        public Employees(Employees employee)
+        {
+            Id = employee.Id;
+            Name = employee.Name;
+            Salary = employee.Salary;
+            Age = employee.Age;
+        }
+
+        public object Clone()
+        {
+            return new Employees
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Age = this.Age,
+                Salary = this.Salary
+            };
+        }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Name: {Name}, Age: {Age}, Salary: {Salary}";
+        }
+
+        public int CompareTo(object? obj)
+        {
+            Employees e = (Employees)obj;
+
+            //if (this.Id > e.Id) return 312;
+            //else if (this.Id < e.Id) return -3312;
+            //else return 0;
+
+            return this.Age.CompareTo(e.Age);
+        }
+    }
+    internal class Program
+    {
+        static void Print10Number(ISeries series)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write(value: $"{series.Current} ");
+                series.Next();
+            }
+            Console.WriteLine();
+            series.Reset();//can call by ref of interface
+        }
+
+        static void Main(string[] args)
+        {
+            #region EX1
+            ////Interfaces: Reference type
+            //   //  Interface are contracts that classes can implement between the developer who write it and the developer who use it[Implementation].
+
+            //  //  IMyType myType = new IMyType();// Invalid Because u Can't Create Object From Any Interfaces.
+
+            //    // NOTE: Can't Create Object From Any Interfaces
+
+            //    //MyType myType = new MyType();
+            //    //myType.Salary = 12000;
+            //    //Console.WriteLine(myType.Salary);
+            //    //myType.MyFun();
+
+            //   // myType.Print(); // Canot Call Default Implmented Methods because of it is [Fully Implemented Methods]
+
+
+            //    IMyType myType;
+            //    // Ref --> Can Refer To Object From Any Class Which Implemented The Interface 'IMyType'
+
+            //    myType = new MyType();
+
+            //    myType.Salary = 12000;
+            //    Console.WriteLine(myType.Salary);
+            //    myType.MyFun();
+            //    myType.Print();
+
+            #endregion
+
+            #region EX2
+            //SeriesByTwo seriesByTwo = new SeriesByTwo();
+            //Print10Number(seriesByTwo);
+
+            //SeriesByThree seriesByThree = new SeriesByThree();
+            //Print10Number(seriesByThree);
+
+            //SeriesByFour seriesByFour = new SeriesByFour();
+            //Print10Number(seriesByFour);
+
+            //int[] Numbers = { 7, 6, 5, 4, 3, 2, 1, 8, 9 };
+
+            //Array.Sort(Numbers);
+
+            //foreach (int item in Numbers)
+            //{
+            //    Console.Write($"{item} ");
+            //} 
+            #endregion
+
+            #region EX3
+            //Airplane airplane = new Airplane();
+
+            //IMoveable moveable = airplane;
+            //moveable.Forward();
+
+            //IFlyable flyable = airplane;
+            //flyable.Forward(); 
+            #endregion
+
+            #region Shallow Copy Vs Deep Copy
+            // Shallow Copy Vs Deep Copy
+
+            // int[] Arr01 = { 1, 2, 3 };
+            // int[] Arr02 = { 4, 5, 6 };
+
+            // Console.WriteLine(value: $"Arr01: {Arr01.GetHashCode()}");
+            // Console.WriteLine(value: $"Arr02: {Arr02.GetHashCode()}");
+
+            // Arr02 = Arr01; // Shallow Copy [faster]
+            // //Copy Identity,address not data
+            // // { 1, 2, 3 }
+            // //--> Has Two Reference Arr01, Arr02
+            // // { 4, 5, 6 }
+            // //--> UnReachable Object
+
+            // Console.WriteLine();
+            // Console.WriteLine(value: $"Arr01: {Arr01.GetHashCode()}");
+            // Console.WriteLine(value: $"Arr02: {Arr02.GetHashCode()}");
+
+            //// Identity(Address)-- > Shallow / Object State[Data]-- > Deep
+
+            // Arr02[0] = 100;
+            // Console.WriteLine(Arr01[0]);
+
+            //------------------------------------------------------------------------------------------
+
+            //int[] Arr01 = { 1, 2, 3 };
+            //int[] Arr02 = { 4, 5, 6 };
+
+            //Console.WriteLine(value: $"Arr01: {Arr01.GetHashCode()}");
+            //Console.WriteLine(value: $"Arr02: {Arr02.GetHashCode()}");
+
+            //Arr02 = (int[])Arr01.Clone(); // Deep Copy(make shallow copy on data [array])
+            //                              // Clone Method Will Copy The Object State Of The Caller
+            //                              // Assign The New Object To Arr02, Will Generate NEW Identity
+
+            //Console.WriteLine();
+            //Console.WriteLine(value: $"Arr01: {Arr01.GetHashCode()}");
+            //Console.WriteLine(value: $"Arr02: {Arr02.GetHashCode()}");
+
+            //// Identity (Address) + Object State [Data]
+
+            //Arr02[0] = 200;
+
+            //Console.WriteLine(Arr01[0]); 
+            ////////////////////////////////////////////////////////////////////////////////////
+            ///
+            //string[] Arr01 = { "mo", "ahmed", "shawky" };
+            //// {ref,ref,ref}
+            //string[] Arr02 = new string[3] { "mariem","rana","yara"};
+
+            ////Console.WriteLine(value: $"Arr01: {Arr01.GetHashCode()}");
+            ////Console.WriteLine(value: $"Arr02: {Arr02.GetHashCode()}");
+            ////Arr02 = Arr01;
+
+            ////Console.WriteLine(value: $"Arr01: {Arr01.GetHashCode()}");
+            ////Console.WriteLine(value: $"Arr02: {Arr02.GetHashCode()}");
+
+            ////Arr01[0] = "hamada";//create new string and old unreachable
+            ////Console.WriteLine(Arr01[0]);
+            ////Console.WriteLine(Arr02[0]);
+
+            //Arr01 =(string[]) Arr02.Clone();
+            //Console.WriteLine(value: $"Arr01: {Arr01.GetHashCode()}");
+            //Console.WriteLine(value: $"Arr02: {Arr02.GetHashCode()}");
+            //Arr01[0] = "hamada";//create new string and old unreachable
+            //Console.WriteLine(Arr01[0]);
+            //Console.WriteLine(Arr02[0]);
+            #endregion
+
+            #region Built-In Interface 
+            //Employees[] employees = new Employees[3]
+            //{
+            //new Employees(){Id = 323, Name = "Ahmed", Age = 30, Salary = 12000},
+            //new Employees(){Id = 2123, Name = "Omar", Age = 27, Salary = 11000},
+            //new Employees(){Id = 31, Name = "Amr", Age = 28, Salary = 13000}
+            //};
+
+            //Array.Sort(employees, comparer: new EmployeeComparerSalary());
+
+            //foreach (Employees item in employees)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+
+
+        }
+    }
+}
