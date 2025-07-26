@@ -1,0 +1,169 @@
+namespace Assignment
+{
+
+    #region Q1
+    //interface Ishape
+    //{
+    //    public double area { get; set; }
+    //    void DisplayShapeInfo();
+    //}
+    //interface ICircle : Ishape
+    //{
+    //    public double radius { get; set; }
+    //}
+    //interface IRectangle : Ishape
+    //{
+
+    //    double Width { get; set; }
+    //    double Height { get; set; }
+    //}
+    //public class Circle : ICircle
+    //{
+
+
+    //    public Circle(double radius)
+    //    {
+    //        this.radius = radius;
+    //        this.area = radius * radius * Math.PI;
+    //    }
+
+    //    public double radius { get; set; }
+    //    public double area { get; set; }
+
+    //    public void DisplayShapeInfo()
+    //    {
+    //        Console.WriteLine($"Circle: Radius = {radius}, Area = {area}");
+    //    }
+    //}
+    //public class Rectangle : IRectangle
+    //{
+    //    public double Width { get; set; }
+    //    public double Height { get; set; }
+    //    public double area { get; set; }
+
+    //    public Rectangle(double width, double height)
+    //    {
+    //        Width = width;
+    //        Height = height;
+    //        this.area = width * height;
+    //    }
+    //    public void DisplayShapeInfo()
+    //    {
+    //        Console.WriteLine($"Rectangle: Width = {Width}, Height = {Height}, Area = {area}");
+    //    }
+    //} 
+    #endregion
+    #region Q2
+    //public interface IAuthenticationService
+    //{
+    //    bool AuthenticateUser(string username, string password);
+    //    bool AuthorizeUser(string username, string role);
+    //}
+    //public class BasicAuthenticationService : IAuthenticationService
+    //{
+    //    string[]role,username,password;
+
+    //    public BasicAuthenticationService() { 
+    //        role=new string[2] { "Admin", "User" };
+    //        username = new string[2] { "Mohamed", "Ahmed" };
+    //        password = new string[2] { "1234", "1212" };
+    //    }
+
+    //    public bool AuthenticateUser(string username, string password)
+    //    {
+    //        for (int i = 0; i < 2; i++)
+    //        {
+    //            if (this.username[i] == username && this.password[i]==password)
+    //                return true;
+    //        }
+    //        return false;   
+    //    }
+
+    //    public bool AuthorizeUser(string username, string role)
+    //    {
+    //        for (int i = 0; i < 2; i++)
+    //        {
+    //            if (this.username[i] == username && this.role[i] == role)
+    //                return true;
+    //        }
+    //        return false;
+
+    //    }
+    //} 
+    #endregion
+    #region Q3
+    //public interface INotificationService
+    //{
+    //    void SendNotification(string recipient, string message);
+    //}
+    //public class EmailNotificationService : INotificationService
+    //{
+    //    public void SendNotification(string recipient, string message)
+    //    {
+    //        Console.WriteLine($"Email Sent to {recipient}: {message}");
+    //    }
+    //}
+    //public class SmsNotificationService : INotificationService
+    //{
+    //    public void SendNotification(string recipient, string message)
+    //    {
+    //        Console.WriteLine($"SMS Sent to {recipient}: {message}");
+    //    }
+    //}
+    //public class PushNotificationService : INotificationService
+    //{
+    //    public void SendNotification(string recipient, string message)
+    //    {
+    //        Console.WriteLine($"Push Notification Sent to {recipient}: {message}");
+    //    }
+    //}
+
+    #endregion
+
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            #region part1
+            //q1 [b]
+            //q2 [a]
+            //q3 [c]
+            //q4 [b]
+            //q5 [d]
+            //q6 [b]
+            //q7 [b]
+            //q8 [a]
+            //q9 [b]
+            //q10 [c] 
+            #endregion
+
+            #region Q1
+            //Circle c = new Circle(4);
+            //c.DisplayShapeInfo();
+
+            //Rectangle r = new Rectangle(3, 4);
+            //r.DisplayShapeInfo(); 
+            #endregion
+
+            #region Q2
+            //IAuthenticationService ob=new BasicAuthenticationService();
+            //Console.WriteLine(ob.AuthenticateUser("Mohamed", "1234"));
+
+            //Console.WriteLine(ob.AuthorizeUser("Mohamed","user")); 
+            #endregion
+            #region Q3
+            //INotificationService emailService = new EmailNotificationService();
+            //INotificationService smsService = new SmsNotificationService();
+            //INotificationService pushService = new PushNotificationService();
+
+            //string recipient = "mohamed";
+            //string message = "i love Ahly";
+
+            //emailService.SendNotification(recipient, message);
+            //smsService.SendNotification(recipient, message);
+            //pushService.SendNotification(recipient, message); 
+            #endregion
+        }
+    }
+}
